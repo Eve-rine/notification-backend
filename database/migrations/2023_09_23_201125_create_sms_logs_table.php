@@ -18,6 +18,7 @@ class CreateSmsLogsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('to');
             $table->text('message');
+            $table->integer('sent_by')->nullable();
             $table->timestamps();
         });
     }

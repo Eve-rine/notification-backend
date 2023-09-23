@@ -42,9 +42,10 @@ class SendSmsNotification extends Notification
     {
         // Log the SMS in the database with user_id
         SmsLog::create([
-            'user_id' => $this->user, // Include the user_id
+            'user_id' => $this->user->id, // Include the user_id
             'to' => $this->user->phone_number,
             'message' => $this->message,
+            'sent_by' => null,
         ]);
 
         return (new AfricasTalkingMessage())
