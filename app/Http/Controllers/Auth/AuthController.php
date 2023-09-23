@@ -18,12 +18,13 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+        // return request
         try{
             $validator=Validator::make($request->all(),[
                 'name' =>'required',
                 'email'=>'required|email|unique:users',
                 'password'=>'required',
-                'phone'=>'required',
+                'phone_number'=>'required',
                 'role'=>'required:string:in:user,admin'
             ]);
             if ($validator->fails()) {
@@ -36,7 +37,9 @@ class AuthController extends Controller
             $user=User::create([
                 'name'  =>$request->input('name'),
                 'email' =>$request->input('email'),
-                'password'=>Hash::make($request->input('password'))
+                'password'=>Hash::make($request->input('password')),
+                'phone_number'=>$request->input('phone_number'),
+                'role'  =>$request->input('role')
             ]);
             return response()
                 ->json([

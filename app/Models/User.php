@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
+        'phone_number',
         'role',
     ];
 
@@ -43,4 +43,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Route notifications for the Africas Talking channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForAfricasTalking($notification)
+    {
+        return $this->phone_number;
+    }
 }
