@@ -45,7 +45,6 @@ class SendSmsNotification extends Notification
             'user_id' => $this->user, // Include the user_id
             'to' => $this->user->phone_number,
             'message' => $this->message,
-            'status' => 'sent', // You can update this based on the response
         ]);
 
         return (new AfricasTalkingMessage())
