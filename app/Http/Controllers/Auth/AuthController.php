@@ -23,7 +23,8 @@ class AuthController extends Controller
                 'name' =>'required',
                 'email'=>'required|email|unique:users',
                 'password'=>'required',
-                'phone'=>'required'
+                'phone'=>'required',
+                'role'=>'required:string:in:user,admin'
             ]);
             if ($validator->fails()) {
                 return response()
