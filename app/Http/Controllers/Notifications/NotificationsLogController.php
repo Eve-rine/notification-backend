@@ -24,6 +24,7 @@ class NotificationsLogController extends Controller
     public function getNotifications(Request $request)
     {
         $notifications = NotificationLog::query()
+            ->with('user')
             ->orderBy('created_at', 'desc')
             ->get();
         return response()->json([

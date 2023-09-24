@@ -31,6 +31,8 @@ Route::post('send-notification', [NotificationsController::class,'sendNotificati
 Route::get('get-notifications-stats', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotificationsStats']);
 // get notification logs
 Route::get('get-notifications-logs', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotifications']);
+// get users
+Route::get('get-users', [\App\Http\Controllers\UserManagement\UsersController::class,'getUsers']);
 
 //Route::group(['middleware'=>'auth:api'], function(){
 //        Route::get('logout', [AuthController::class,'logout']);

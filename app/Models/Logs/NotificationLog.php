@@ -2,6 +2,7 @@
 
 namespace App\Models\Logs;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,9 @@ class NotificationLog extends Model
         'mode', // 'sms' or 'email
         'sent_by',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
