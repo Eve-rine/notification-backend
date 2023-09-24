@@ -26,16 +26,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::post('register', [AuthController::class,'register']);
     });
 
-Route::post('send-notification', [NotificationsController::class,'sendNotification']);
-// get notification stats
-Route::get('get-notifications-stats', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotificationsStats']);
-// get notification logs
-Route::get('get-notifications-logs', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotifications']);
-// get users
-Route::get('get-users', [\App\Http\Controllers\UserManagement\UsersController::class,'getUsers']);
+Route::middleware('auth:sanctum')->post('/logout',  [AuthController::class,'logout']);
 
-//Route::group(['middleware'=>'auth:api'], function(){
-//        Route::get('logout', [AuthController::class,'logout']);
-//        // send notification
-//
-//    });
+Route::group(['middleware'=>'auth:api'], function(){
+        // send notification
+        Route::post('send-notification', [NotificationsController::class,'sendNotification']);
+        // get notification stats
+        Route::get('get-notifications-stats', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotificationsStats']);
+        // get notification logs
+        Route::get('get-notifications-logs', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotifications']);
+        // get users
+        Route::get('get-users', [\App\Http\Controllers\UserManagement\UsersController::class,'getUsers']);
+    });
