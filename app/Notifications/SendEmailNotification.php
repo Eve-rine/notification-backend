@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Logs\EmailLog;
+use App\Models\Logs\NotificationLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -44,12 +44,13 @@ class SendEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        EmailLog::query()->create(
+        NotificationLog::query()->create(
             [
                 'user_id' => $this->user->id?:null,
-                'email_address' => $this->user->email?:null,
-                'email_subject' => "Hello",
-                'email_description' => $this->message,
+                'to' => $this->user->email?:null,
+                'subject' => "Hello",
+                'message' => $this->message,
+                'mode' => 'email',
                 'sent_by' => null,
             ]
         );

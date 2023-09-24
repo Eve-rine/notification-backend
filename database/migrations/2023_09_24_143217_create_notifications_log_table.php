@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSmsLogsTable extends Migration
+class CreateNotificationsLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSmsLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_logs', function (Blueprint $table) {
+        Schema::create('notifications_log', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('to');
@@ -30,6 +30,6 @@ class CreateSmsLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sms_logs');
+        Schema::dropIfExists('notifications_log');
     }
 }

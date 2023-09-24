@@ -5,17 +5,18 @@ namespace App\Models\Logs;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmailLog extends Model
+class NotificationLog extends Model
 {
     use HasFactory;
 
-    protected $table = 'email_logs';
+    protected $table = 'notifications_log';
 
     protected $fillable = [
         'user_id',
-        'email_address',
-        'email_subject',
-        'email_description',
+        'to',
+        'title',
+        'message',
+        'mode', // 'sms' or 'email
         'sent_by',
     ];
 }

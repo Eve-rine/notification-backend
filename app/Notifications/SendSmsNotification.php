@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\SmsLog;
+use App\Models\Logs\NotificationLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\AfricasTalking\AfricasTalkingChannel;
@@ -41,10 +41,12 @@ class SendSmsNotification extends Notification
     public function toAfricasTalking($notifiable)
     {
         // Log the SMS in the database with user_id
-        SmsLog::create([
+        NotificationLog::create([
             'user_id' => $this->user->id, // Include the user_id
             'to' => $this->user->phone_number,
+            'title' => null, // This is the title of the SMS, you can change this to anything you want
             'message' => $this->message,
+            'mode' => 'sms',
             'sent_by' => null,
         ]);
 
