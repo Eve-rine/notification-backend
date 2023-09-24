@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // set command to run at midnight
+        $schedule->command('command:send-admin-notifications')->dailyAt('23:59');
     }
 
     /**

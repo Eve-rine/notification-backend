@@ -12,18 +12,19 @@ class SendEmailNotification extends Notification
     use Queueable;
     public $user;
     public $message;
+    public $title;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user,$message)
+    public function __construct($message,$title,$user)
     {
         //
         $this->user=$user;
         $this->message=$message;
+        $this->title=$title;
     }
-
 
     /**
      * Get the notification's delivery channels.
@@ -48,7 +49,7 @@ class SendEmailNotification extends Notification
             [
                 'user_id' => $this->user->id?:null,
                 'to' => $this->user->email?:null,
-                'subject' => "Hello",
+                'title' => $this->title?:null,
                 'message' => $this->message,
                 'mode' => 'email',
                 'sent_by' => null,

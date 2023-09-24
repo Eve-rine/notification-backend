@@ -14,17 +14,21 @@ class SendSmsNotification extends Notification
 
     protected $message;
     protected $user;
+    protected $title;
+
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message, $user)
+    public function __construct($message,$title, $user)
     {
         // message
         $this->message = $message;
-        $this->user = $user; // Store the user
+        $this->user = $user;
+        $this->title = $title;
+
     }
 
     /**
@@ -44,7 +48,7 @@ class SendSmsNotification extends Notification
         NotificationLog::create([
             'user_id' => $this->user->id, // Include the user_id
             'to' => $this->user->phone_number,
-            'title' => null, // This is the title of the SMS, you can change this to anything you want
+            'title' => $this->title,
             'message' => $this->message,
             'mode' => 'sms',
             'sent_by' => null,
