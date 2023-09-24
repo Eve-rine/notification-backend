@@ -17,7 +17,9 @@ class CreateNotificationsLogTable extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('to');
+            $table->string('title')->nullable();
             $table->text('message');
+            $table->string('mode'); // 'sms' or 'email
             $table->integer('sent_by')->nullable();
             $table->timestamps();
         });

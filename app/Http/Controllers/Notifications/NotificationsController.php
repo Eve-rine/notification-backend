@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Notifications;
 
+use App\Http\Controllers\Controller;
 use App\Models\Logs\EmailLog;
+use App\Models\Logs\NotificationLog;
 use App\Models\User;
 use App\Notifications\SendSmsNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,10 +36,10 @@ class NotificationsController extends Controller
             Notification::route('mail', $user->email)->notify(new \App\Notifications\SendEmailNotification($user, $request->message));
         }else{
             // send sms
-             $users = User::all();   // get all users
-             foreach ($users as $user) {
-               Notification::send($user, new SendSmsNotification($request->message, $user));
-             }
+            $users = User::all();   // get all users
+            foreach ($users as $user) {
+                Notification::send($user, new SendSmsNotification($request->message, $user));
+            }
         }
         return response()->json([
             'message' => 'Notification sent successfully',

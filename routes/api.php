@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\Notifications\NotificationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     });
 
 Route::post('send-notification', [NotificationsController::class,'sendNotification']);
+// get notification stats
+Route::get('get-notifications-stats', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotificationsStats']);
+// get notification logs
+Route::get('get-notifications-logs', [\App\Http\Controllers\Notifications\NotificationsLogController::class,'getNotifications']);
 
 //Route::group(['middleware'=>'auth:api'], function(){
 //        Route::get('logout', [AuthController::class,'logout']);
