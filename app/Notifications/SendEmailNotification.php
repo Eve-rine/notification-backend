@@ -6,6 +6,7 @@ use App\Models\Logs\NotificationLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class SendEmailNotification extends Notification
 {
@@ -52,7 +53,7 @@ class SendEmailNotification extends Notification
                 'title' => $this->title?:null,
                 'message' => $this->message,
                 'mode' => 'email',
-                'sent_by' => null,
+                'sent_by' => Auth::user()->id?:null
             ]
         );
         return (new MailMessage)

@@ -5,6 +5,7 @@ namespace App\Notifications;
 use App\Models\Logs\NotificationLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 use NotificationChannels\AfricasTalking\AfricasTalkingChannel;
 use NotificationChannels\AfricasTalking\AfricasTalkingMessage;
 
@@ -51,7 +52,7 @@ class SendSmsNotification extends Notification
             'title' => $this->title,
             'message' => $this->message,
             'mode' => 'sms',
-            'sent_by' => null,
+            'sent_by' => Auth::user()->id?:null
         ]);
 
         return (new AfricasTalkingMessage())
